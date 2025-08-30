@@ -2562,6 +2562,14 @@
         </div>
     </footer>
     
+    <!DOCTYPE html>
+<html lang="it">
+<head>
+    [Tutto il codice head rimane invariato...]
+</head>
+<body>
+    [Tutto il codice body rimane invariato fino allo script...]
+
     <script>
         // Configurazione del sito
         let siteConfig = {
@@ -2622,19 +2630,19 @@
                 category: 3,
                 subcategory: 301,
                 images: [
-                   "https://https://postimg.cc/qNZ3B7PD/0a246302"
+                   "https://images.unsplash.com/photo-1593941707882-a522ba76b611?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                 ]
             },
             {
                 id: 2,
                 title: "Bouquet candele medio",
                 price: "€43,99",
-                description: "Realizzato interamente a meno, vaso riutilizzabile in gesso ceramico e candele profumate. Perchè sceglierlo? Non appassisce e rimane un ricordo speciale. Utilizzabile anche come bomboniera (il prezzo varia in base alla quantità ordinata).",
+                description: "Realizzato interamente a mano, vaso riutilizzabile in gesso ceramico e candele profumate. Perchè sceglierlo? Non appassisce e rimane un ricordo speciale. Utilizzabile anche come bomboniera (il prezzo varia in base alla quantità ordinata).",
                 badge: "Best Seller",
                 category: 2,
                 subcategory: 202,
                 images: [
-                   "https://postimg.cc/LgHtYbNx/6ca7d03e"
+                   "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                 ]
             },
             {
@@ -2646,8 +2654,8 @@
                 category: 2,
                 subcategory: 201,
                 images: [
-                     "https://postimg.cc/K4rQGnJ9/9a534592",
-                    "https://postimg.cc/CBwBmfk1/11255bb5"
+                    "https://images.unsplash.com/photo-1593941707882-a522ba76b611?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1593941707882-a522ba76b611?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                 ]
             },
             {
@@ -2659,7 +2667,7 @@
                 category: 1,
                 subcategory: 101,
                 images: [
-                    "https://postimg.cc/Wtj6HdT0/3ff57d33"
+                    "https://images.unsplash.com/photo-1593941707882-a522ba76b611?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                 ]
             },
             {
@@ -2670,9 +2678,9 @@
                 badge: "Personalizzabile",
                 category: 4,
                 images: [
-                     "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                    "https://postimg.cc/dkXFDbsY/480dc8eb",
-                    "https://postimg.cc/nMjZNh2c/54ba1389"
+                    "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1593941707882-a522ba76b611?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                 ]
             }
         ];
@@ -2694,7 +2702,228 @@
         let currentImageArray = [];
         let isAdminLoggedIn = false;
         
-        // Funzioni di autenticazione admin
+        // === SISTEMA DI PERSISTENZA DATI AVANZATO ===
+        class DataManager {
+            constructor() {
+                this.SAVE_INTERVAL = 30000; // Salva ogni 30 secondi
+                this.init();
+            }
+
+            init() {
+                // Carica i dati all'avvio
+                this.loadData();
+                
+                // Imposta l'auto-salvataggio
+                setInterval(() => this.autoSave(), this.SAVE_INTERVAL);
+                
+                // Salva prima di chiudere la pagina
+                window.addEventListener('beforeunload', () => this.saveData());
+                
+                // Salva quando la pagina diventa invisibile
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'hidden') {
+                        this.saveData();
+                    }
+                });
+            }
+
+            loadData() {
+                try {
+                    // Carica configurazione
+                    const savedConfig = localStorage.getItem('mariposa_config');
+                    if (savedConfig) {
+                        siteConfig = JSON.parse(savedConfig);
+                        this.updateUIFromConfig();
+                    }
+
+                    // Carica prodotti
+                    const savedProducts = localStorage.getItem('mariposa_products');
+                    if (savedProducts) {
+                        products = JSON.parse(savedProducts);
+                    }
+
+                    // Carica recensioni
+                    const savedReviews = localStorage.getItem('mariposa_reviews');
+                    if (savedReviews) {
+                        reviews = JSON.parse(savedReviews);
+                    }
+
+                    // Carica recensioni in attesa
+                    const savedPendingReviews = localStorage.getItem('mariposa_pending_reviews');
+                    if (savedPendingReviews) {
+                        pendingReviews = JSON.parse(savedPendingReviews);
+                    }
+
+                    // Carica categorie
+                    const savedCategories = localStorage.getItem('mariposa_categories');
+                    if (savedCategories) {
+                        categories = JSON.parse(savedCategories);
+                    }
+
+                    console.log('✅ Dati caricati con successo');
+                } catch (error) {
+                    console.error('❌ Errore nel caricamento dei dati:', error);
+                }
+            }
+
+            saveData() {
+                try {
+                    localStorage.setItem('mariposa_config', JSON.stringify(siteConfig));
+                    localStorage.setItem('mariposa_products', JSON.stringify(products));
+                    localStorage.setItem('mariposa_reviews', JSON.stringify(reviews));
+                    localStorage.setItem('mariposa_pending_reviews', JSON.stringify(pendingReviews));
+                    localStorage.setItem('mariposa_categories', JSON.stringify(categories));
+                    
+                    console.log('💾 Dati salvati automaticamente');
+                } catch (error) {
+                    console.error('❌ Errore nel salvataggio dei dati:', error);
+                }
+            }
+
+            autoSave() {
+                this.saveData();
+                this.showSaveNotification();
+            }
+
+            updateUIFromConfig() {
+                // Aggiorna l'interfaccia con la configurazione salvata
+                const logo = document.getElementById('logo');
+                const tagline = document.getElementById('tagline');
+                
+                if (logo) logo.textContent = siteConfig.logo;
+                if (tagline) tagline.textContent = siteConfig.tagline;
+            }
+
+            showSaveNotification() {
+                // Mostra notifica di salvataggio
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                    z-index: 10000;
+                    font-size: 14px;
+                    transition: all 0.3s ease;
+                `;
+                notification.textContent = '💾 Dati salvati automaticamente';
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateY(10px)';
+                    setTimeout(() => notification.remove(), 300);
+                }, 2000);
+            }
+        }
+
+        // Sistema di recensioni migliorato
+        class ReviewManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupForm();
+            }
+
+            setupForm() {
+                const form = document.getElementById('customerReviewForm');
+                if (form) {
+                    form.addEventListener('submit', (e) => this.handleFormSubmit(e));
+                }
+            }
+
+            handleFormSubmit(e) {
+                e.preventDefault();
+                
+                const review = {
+                    id: Date.now(),
+                    customerName: document.getElementById('customerName').value,
+                    email: document.getElementById('customerEmail').value,
+                    orderNumber: document.getElementById('customerOrder').value,
+                    rating: parseInt(document.getElementById('customerRating').value),
+                    text: document.getElementById('customerReview').value,
+                    images: this.getUploadedImages(),
+                    date: new Date().toISOString(),
+                    adminResponse: ''
+                };
+
+                // Aggiungi alle recensioni in attesa
+                pendingReviews.push(review);
+                
+                // Salva i dati
+                dataManager.saveData();
+                
+                // Mostra conferma
+                this.showSuccessMessage();
+                
+                // Reset form
+                e.target.reset();
+                document.getElementById('customerImagePreview').innerHTML = '';
+                uploadedCustomerImages = [];
+                
+                // Notifica admin se loggato
+                if (isAdminLoggedIn) {
+                    loadReviewList();
+                }
+            }
+
+            getUploadedImages() {
+                const preview = document.getElementById('customerImagePreview');
+                const images = [];
+                const imgElements = preview.querySelectorAll('img');
+                
+                imgElements.forEach(img => {
+                    images.push(img.src);
+                });
+                
+                return images;
+            }
+
+            showSuccessMessage() {
+                const message = document.createElement('div');
+                message.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(135deg, var(--white), var(--soft-magenta));
+                    color: var(--primary-magenta);
+                    padding: 30px 40px;
+                    border-radius: 20px;
+                    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+                    z-index: 10001;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: 600;
+                    max-width: 400px;
+                `;
+                message.innerHTML = `
+                    <div style="font-size: 40px; margin-bottom: 15px;">✅</div>
+                    <div>Grazie per la tua recensione!</div>
+                    <div style="font-size: 14px; margin-top: 10px; opacity: 0.8;">Sarà pubblicata dopo la verifica</div>
+                `;
+                
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    message.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    setTimeout(() => message.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Inizializza i sistemi
+        const dataManager = new DataManager();
+        const reviewManager = new ReviewManager();
+        
+        // === FUNZIONI DI AUTENTICAZIONE ADMIN ===
         function showLoginModal() {
             document.getElementById('loginModal').style.display = 'block';
             document.getElementById('adminPassword').focus();
@@ -2742,7 +2971,7 @@
             }
         }
         
-        // Funzioni del pannello di amministrazione
+        // === FUNZIONI DEL PANNELLO DI AMMINISTRAZIONE ===
         function toggleAdmin() {
             if (!isAdminLoggedIn) {
                 showLoginModal();
@@ -2782,73 +3011,16 @@
         }
         
         function saveChanges() {
-            try {
-                localStorage.setItem('mariposa_config', JSON.stringify(siteConfig));
-                localStorage.setItem('mariposa_products', JSON.stringify(products));
-                localStorage.setItem('mariposa_reviews', JSON.stringify(reviews));
-                localStorage.setItem('mariposa_pending_reviews', JSON.stringify(pendingReviews));
-                localStorage.setItem('mariposa_categories', JSON.stringify(categories));
-                alert('✅ Modifiche salvate con successo!');
-            } catch (e) {
-                console.error('Errore durante il salvataggio dei dati:', e);
-                alert('❌ Errore durante il salvataggio dei dati. Riprova.');
-            }
+            dataManager.saveData();
+            alert('✅ Modifiche salvate con successo!');
         }
         
-        // Funzione per caricare i dati senza mostrare alert
-        function loadChangesSilent() {
-            const savedConfig = localStorage.getItem('mariposa_config');
-            const savedProducts = localStorage.getItem('mariposa_products');
-            const savedReviews = localStorage.getItem('mariposa_reviews');
-            const savedPendingReviews = localStorage.getItem('mariposa_pending_reviews');
-            const savedCategories = localStorage.getItem('mariposa_categories');
-            
-            if (savedConfig) {
-                siteConfig = JSON.parse(savedConfig);
-                
-                // Aggiorna tutti i campi
-                document.getElementById('editLogo').value = siteConfig.logo;
-                document.getElementById('editTagline').value = siteConfig.tagline;
-                document.getElementById('editEmail').value = siteConfig.email;
-                document.getElementById('editInstagram').value = siteConfig.instagram;
-                
-                // Applica le modifiche
-                updateLogo();
-                updateTagline();
-                updateEmail();
-                updateInstagram();
-            }
-            
-            if (savedProducts) {
-                products = JSON.parse(savedProducts);
-            }
-            
-            if (savedReviews) {
-                reviews = JSON.parse(savedReviews);
-            }
-            
-            if (savedPendingReviews) {
-                pendingReviews = JSON.parse(savedPendingReviews);
-            }
-            
-            if (savedCategories) {
-                categories = JSON.parse(savedCategories);
-            }
-            
-            // Aggiorna UI dopo aver caricato i dati
-            renderCategories();
-            updateCategoryOptions();
-            renderProducts();
-            renderReviews();
-        }
-        
-        // Funzione per caricare i dati con alert (solo quando l'utente clicca sul pulsante)
         function loadChanges() {
-            loadChangesSilent();
+            dataManager.loadData();
             alert('✅ Dati caricati!');
         }
         
-        // Funzioni per la gestione delle categorie
+        // === FUNZIONI PER LA GESTIONE DELLE CATEGORIE ===
         function addCategory() {
             const categoryName = document.getElementById('newCategoryName').value.trim();
             
@@ -3208,7 +3380,7 @@
             renderProducts();
         }
         
-        // Funzioni per la gestione dei prodotti
+        // === FUNZIONI PER LA GESTIONE DEI PRODOTTI ===
         function previewImages(input) {
             const preview = document.getElementById('imagePreview');
             
@@ -3308,6 +3480,9 @@
                 products.push(newProduct);
                 alert('✅ Nuovo prodotto creato!');
             }
+            
+            // Salva i dati
+            dataManager.saveData();
             
             renderProducts();
             loadProductList();
@@ -3410,6 +3585,10 @@
         function deleteProduct(id) {
             if (confirm('Sei sicuro di voler eliminare questo prodotto?')) {
                 products = products.filter(p => p.id !== id);
+                
+                // Salva i dati
+                dataManager.saveData();
+                
                 renderProducts();
                 loadProductList();
                 
@@ -3504,7 +3683,7 @@
             }
         }
         
-        // Funzioni per la gestione delle recensioni
+        // === FUNZIONI PER LA GESTIONE DELLE RECENSIONI ===
         function loadReviewList() {
             const listContainer = document.getElementById('reviewList');
             listContainer.innerHTML = '';
@@ -3682,7 +3861,10 @@
             const response = prompt("Rispondi alla recensione di " + review.customerName + ":", review.adminResponse || "");
             if (response !== null) {
                 review.adminResponse = response;
-                saveChanges();
+                
+                // Salva i dati
+                dataManager.saveData();
+                
                 loadReviewList();
                 renderReviews();
             }
@@ -3696,7 +3878,9 @@
                 reviews.push(review);
                 pendingReviews.splice(reviewIndex, 1);
                 
-                saveChanges();
+                // Salva i dati
+                dataManager.saveData();
+                
                 loadReviewList();
                 renderReviews();
                 
@@ -3707,7 +3891,10 @@
         function deleteReview(id) {
             if (confirm('Sei sicuro di voler eliminare questa recensione?')) {
                 reviews = reviews.filter(r => r.id !== id);
-                saveChanges();
+                
+                // Salva i dati
+                dataManager.saveData();
+                
                 loadReviewList();
                 renderReviews();
                 alert('✅ Recensione eliminata!');
@@ -3717,13 +3904,16 @@
         function deletePendingReview(id) {
             if (confirm('Sei sicuro di voler eliminare questa recensione?')) {
                 pendingReviews = pendingReviews.filter(r => r.id !== id);
-                saveChanges();
+                
+                // Salva i dati
+                dataManager.saveData();
+                
                 loadReviewList();
                 alert('✅ Recensione eliminata!');
             }
         }
         
-        // Funzioni per il form delle recensioni dei clienti
+        // === FUNZIONI PER IL FORM DELLE RECENSIONI DEI CLIENTI ===
         function previewCustomerImages(input) {
             const preview = document.getElementById('customerImagePreview');
             preview.innerHTML = '';
@@ -3755,50 +3945,7 @@
             }
         }
         
-        // Gestione del form delle recensioni dei clienti
-        document.getElementById('customerReviewForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const customerName = document.getElementById('customerName').value;
-            const customerEmail = document.getElementById('customerEmail').value;
-            const customerOrder = document.getElementById('customerOrder').value;
-            const customerRating = document.getElementById('customerRating').value;
-            const customerReview = document.getElementById('customerReview').value;
-            
-            // Crea una nuova recensione in attesa di approvazione
-            const newReview = {
-                id: Date.now(),
-                customerName: customerName,
-                email: customerEmail,
-                orderNumber: customerOrder,
-                rating: parseInt(customerRating),
-                text: customerReview,
-                images: [...uploadedCustomerImages],
-                adminResponse: '',
-                date: new Date().toISOString()
-            };
-            
-            // Aggiungi alle recensioni in attesa
-            pendingReviews.push(newReview);
-            
-            // Salva nel localStorage
-            saveChanges();
-            
-            // Reset form
-            document.getElementById('customerReviewForm').reset();
-            document.getElementById('customerImagePreview').innerHTML = '';
-            uploadedCustomerImages = [];
-            
-            // Mostra messaggio di conferma
-            alert('Grazie per aver lasciato una recensione! Sarà pubblicata dopo la verifica da parte nostra.');
-            
-            // Aggiorna la visualizzazione delle recensioni se l'admin è loggato
-            if (isAdminLoggedIn) {
-                loadReviewList();
-            }
-        });
-        
-        // Funzioni per i modal
+        // === FUNZIONI PER I MODAL ===
         function openProductModal(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
@@ -3892,7 +4039,7 @@
             document.body.style.overflow = 'auto';
         }
         
-        // Funzioni per il visualizzatore di immagini
+        // === FUNZIONI PER IL VISUALIZZATORE DI IMMAGINI ===
         function openImageViewer(index) {
             currentImageIndex = index;
             updateImageViewer();
@@ -3923,7 +4070,7 @@
             }
         }
         
-        // Funzioni per gli ordini
+        // === FUNZIONI PER GLI ORDINI ===
         function orderInstagram() {
             // Apri direttamente il profilo Instagram
             const instagramUrl = 'https://instagram.com/mariposa.handmade_';
@@ -3938,7 +4085,7 @@
             window.location.href = emailUrl;
         }
         
-        // Funzioni di utilità
+        // === FUNZIONI DI UTILITÀ ===
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -4020,13 +4167,22 @@
             }
         });
         
-        // Carica i dati salvati all'avvio in modo silenzioso
+        // === INIZIALIZZAZIONE ===
         window.addEventListener('load', () => {
             // Controlla se l'admin è già loggato
             checkAdminLogin();
             
-            // Carica i dati salvati in modo silenzioso (senza mostrare alert)
-            loadChangesSilent();
+            // Carica i dati salvati
+            dataManager.loadData();
+            
+            // Inizializza il sistema di recensioni
+            reviewManager.loadReviews();
+            
+            // Renderizza categorie e prodotti
+            renderCategories();
+            renderProducts();
+            
+            console.log('🚀 Mariposa Handmade inizializzato con successo');
         });
     </script>
 </body>
