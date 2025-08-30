@@ -1,0 +1,4033 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariposa Handmade - Creazioni Artigianali Uniche</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-magenta: #D81B60;
+            --secondary-magenta: #EC407A;
+            --soft-magenta: #FCE4EC;
+            --accent-pink: #F48FB1;
+            --accent-purple: #AB47BC;
+            --accent-blue: #42A5F5;
+            --gold: #FFD700;
+            --silver: #E0E0E0;
+            --dark-text: #2C2C2C;
+            --light-text: #666;
+            --white: #FFFFFF;
+            --shadow: 0 15px 35px rgba(0,0,0,0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f5f7fa 0%, #fce4ec 100%);
+            position: relative;
+        }
+        
+        /* Decorazioni */
+        .decoration {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .sparkle {
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+            border-radius: 50%;
+            position: absolute;
+            animation: sparkle 3s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: translateY(0) scale(0); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+        
+        .floating-butterfly {
+            position: absolute;
+            font-size: 2rem;
+            animation: float-butterfly 20s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes float-butterfly {
+            0% { transform: translateX(-100px) translateY(0) rotate(0deg); }
+            25% { transform: translateX(calc(100vw + 100px)) translateY(-50px) rotate(20deg); }
+            50% { transform: translateX(calc(100vw + 100px)) translateY(50px) rotate(-20deg); }
+            75% { transform: translateX(-100px) translateY(-30px) rotate(10deg); }
+            100% { transform: translateX(-100px) translateY(0) rotate(0deg); }
+        }
+        
+        .circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px dashed var(--soft-magenta);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Admin Login */
+        .admin-login {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .admin-trigger {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--dark-text);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        
+        .admin-trigger:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .login-content {
+            background: linear-gradient(135deg, var(--white), var(--soft-magenta));
+            margin: 15% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--secondary-magenta);
+            text-align: center;
+        }
+        
+        .login-content h3 {
+            color: var(--primary-magenta);
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+        }
+        
+        .login-content input {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px solid var(--soft-magenta);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        
+        .login-content input:focus {
+            outline: none;
+            border-color: var(--primary-magenta);
+            box-shadow: 0 0 0 4px rgba(216, 27, 96, 0.1);
+        }
+        
+        .login-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .login-btn {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+        }
+        
+        .login-cancel {
+            flex: 1;
+            background: var(--light-text);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .login-cancel:hover {
+            background: #555;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, var(--white), var(--soft-magenta));
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            z-index: 9999;
+            max-width: 380px;
+            display: none;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--secondary-magenta);
+        }
+        
+        .admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10000;
+            box-shadow: 0 8px 25px rgba(216, 27, 96, 0.4);
+            width: 60px;
+            height: 60px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: var(--transition);
+        }
+        
+        .admin-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 12px 30px rgba(216, 27, 96, 0.6);
+        }
+        
+        .admin-panel h3 {
+            color: var(--primary-magenta);
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--soft-magenta);
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        
+        .admin-panel input, .admin-panel textarea, .admin-panel select {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid var(--soft-magenta);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        
+        .admin-panel input:focus, .admin-panel textarea:focus, .admin-panel select:focus {
+            outline: none;
+            border-color: var(--primary-magenta);
+            box-shadow: 0 0 0 4px rgba(216, 27, 96, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .admin-panel button {
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+        }
+        
+        .admin-panel button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(216, 27, 96, 0.5);
+        }
+        
+        .admin-panel .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-pink), var(--secondary-magenta));
+        }
+        
+        .admin-panel .btn-warning {
+            background: linear-gradient(135deg, #FFB74D, #FF9800);
+        }
+        
+        .admin-panel .btn-danger {
+            background: linear-gradient(135deg, #ef5350, #e53935);
+        }
+        
+        .admin-section {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--soft-magenta);
+        }
+        
+        .admin-section:last-child {
+            border-bottom: none;
+        }
+        
+        .admin-section h4 {
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .image-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 100%;
+            padding: 25px;
+            border: 2px dashed var(--primary-magenta);
+            border-radius: 15px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--soft-magenta), var(--white));
+            transition: var(--transition);
+        }
+        
+        .image-upload:hover {
+            background: linear-gradient(135deg, var(--secondary-magenta), var(--soft-magenta));
+            transform: scale(1.02);
+        }
+        
+        .image-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .image-preview img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid var(--white);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .image-preview img:hover {
+            transform: scale(1.1);
+        }
+        
+        .image-preview .remove-image {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-magenta);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+        
+        .image-preview .remove-image:hover {
+            background: #f44336;
+            transform: scale(1.1);
+        }
+        
+        .product-list, .review-list {
+            max-height: 350px;
+            overflow-y: auto;
+            border: 2px solid var(--soft-magenta);
+            border-radius: 12px;
+            padding: 15px;
+            background: var(--white);
+        }
+        
+        .product-item, .review-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid var(--soft-magenta);
+            transition: var(--transition);
+        }
+        
+        .product-item:hover, .review-item:hover {
+            background: var(--soft-magenta);
+            transform: translateX(5px);
+        }
+        
+        .product-item:last-child, .review-item:last-child {
+            border-bottom: none;
+        }
+        
+        .product-item-buttons, .review-item-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .product-item button, .review-item button {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .product-item button:hover, .review-item button:hover {
+            transform: scale(1.1);
+        }
+        
+        .product-item .btn-edit, .review-item .btn-edit {
+            background: var(--accent-blue);
+        }
+        
+        .product-item .btn-edit:hover, .review-item .btn-edit:hover {
+            background: #1976D2;
+        }
+        
+        /* Rating Stars */
+        .rating {
+            display: inline-flex;
+            gap: 3px;
+        }
+        
+        .rating i {
+            color: var(--gold);
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta), var(--accent-pink));
+            color: var(--white);
+            text-align: center;
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="butterflies" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M25 15 Q30 10 35 15 Q40 20 35 25 Q30 30 25 25 Q20 20 25 15 Z M15 15 Q10 10 5 15 Q0 20 5 25 Q10 30 15 25 Q20 20 15 15 Z" fill="rgba(255,255,255,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23butterflies)"/></svg>') repeat;
+            animation: float 20s linear infinite;
+            opacity: 0.2;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, var(--white), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+        
+        .logo::before {
+            content: '✨';
+            position: absolute;
+            left: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4rem;
+            animation: sparkle-rotate 3s ease-in-out infinite;
+        }
+        
+        .logo::after {
+            content: '✨';
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4rem;
+            animation: sparkle-rotate 3s ease-in-out infinite reverse;
+        }
+        
+        @keyframes sparkle-rotate {
+            0%, 100% { transform: translateY(-50%) rotate(0deg) scale(1); }
+            50% { transform: translateY(-60%) rotate(180deg) scale(1.2); }
+        }
+        
+        .tagline {
+            font-size: 1.6rem;
+            font-weight: 300;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-top: 20px;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .cta-main {
+            background: linear-gradient(135deg, var(--white), var(--gold));
+            color: var(--primary-magenta);
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            font-family: 'Playfair Display', serif;
+            overflow: hidden;
+        }
+        
+        .cta-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: var(--transition);
+        }
+        
+        .cta-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        
+        .cta-main:hover::before {
+            left: 100%;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: linear-gradient(135deg, var(--white), var(--soft-magenta));
+            padding: 25px 0;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--secondary-magenta);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.1rem;
+            padding: 8px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-magenta), var(--accent-pink));
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-magenta);
+            transform: translateY(-2px);
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--soft-magenta), var(--white));
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-magenta), var(--gold), var(--secondary-magenta));
+            border-radius: 3px;
+        }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .category-tab {
+            background: var(--white);
+            border: 2px solid var(--soft-magenta);
+            color: var(--dark-text);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .category-tab:hover, .category-tab.active {
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.2);
+        }
+        
+        .category-tab:hover::before, .category-tab.active::before {
+            width: 100%;
+        }
+        
+        /* Subcategory Tabs */
+        .subcategory-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .subcategory-tab {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--soft-magenta);
+            color: var(--dark-text);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        
+        .subcategory-tab:hover, .subcategory-tab.active {
+            background: var(--soft-magenta);
+            transform: translateY(-2px);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+        
+        .product-card {
+            background: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+            border: 1px solid var(--soft-magenta);
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-magenta), var(--secondary-magenta), var(--accent-pink));
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(216, 27, 96, 0.25);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(255,255,255,0.8), transparent);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.4);
+            z-index: 1;
+        }
+        
+        .product-content {
+            padding: 35px;
+        }
+        
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .product-description {
+            color: var(--light-text);
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .product-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-magenta);
+            margin-bottom: 30px;
+            text-shadow: 0 2px 5px rgba(216, 27, 96, 0.1);
+        }
+        
+        .product-cta {
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            color: var(--white);
+            border: none;
+            padding: 18px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-cta::before {
+            content: '✨';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .product-cta:hover {
+            background: linear-gradient(135deg, var(--secondary-magenta), var(--primary-magenta));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(216, 27, 96, 0.5);
+        }
+        
+        .product-cta:hover::before {
+            right: 15px;
+            animation: sparkle-bounce 0.5s ease infinite;
+        }
+        
+        @keyframes sparkle-bounce {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-60%) scale(1.2); }
+        }
+        
+        /* Add Product Card */
+        .add-product-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px dashed var(--primary-magenta);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            min-height: 500px;
+        }
+        
+        .add-product-card:hover {
+            background: rgba(252, 228, 236, 0.9);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(216, 27, 96, 0.15);
+        }
+        
+        .add-product-icon {
+            font-size: 5rem;
+            color: var(--primary-magenta);
+            margin-bottom: 20px;
+        }
+        
+        .add-product-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-magenta);
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Reviews Section - Enfatizzata */
+        .reviews {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta), var(--accent-pink));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reviews::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.3)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>') repeat;
+            animation: float 30s linear infinite;
+            opacity: 0.3;
+        }
+        
+        .reviews .section-title {
+            color: var(--white);
+            -webkit-text-fill-color: var(--white);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .review-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--soft-magenta);
+            position: relative;
+        }
+        
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--accent-pink), var(--accent-blue));
+        }
+        
+        .review-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--soft-magenta), var(--white));
+        }
+        
+        .review-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            margin-right: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .review-info {
+            flex: 1;
+        }
+        
+        .review-customer {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+        }
+        
+        .review-date {
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        
+        .review-rating {
+            margin-top: 8px;
+        }
+        
+        .review-content {
+            padding: 25px;
+        }
+        
+        .review-text {
+            color: var(--dark-text);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        
+        .review-images {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .review-image {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 3px solid var(--white);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .review-image:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .review-response {
+            background: linear-gradient(135deg, var(--soft-magenta), var(--white));
+            border-left: 5px solid var(--primary-magenta);
+            padding: 20px;
+            border-radius: 0 15px 15px 0;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .review-response-title {
+            font-weight: 600;
+            color: var(--primary-magenta);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .review-response-title i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .review-response-text {
+            color: var(--dark-text);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* Customer Review Form - Enfatizzato */
+        .customer-review-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--soft-magenta), var(--white));
+            position: relative;
+            border-top: 5px solid var(--primary-magenta);
+            border-bottom: 5px solid var(--primary-magenta);
+        }
+        
+        .customer-review-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--white), var(--soft-magenta));
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--secondary-magenta);
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--primary-magenta);
+            font-size: 1.1rem;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--soft-magenta);
+            border-radius: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-magenta);
+            box-shadow: 0 0 0 5px rgba(216, 27, 96, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-review-btn {
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(216, 27, 96, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-review-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: var(--transition);
+        }
+        
+        .submit-review-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(216, 27, 96, 0.6);
+        }
+        
+        .submit-review-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Product Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, var(--white), var(--soft-magenta));
+            margin: 3% auto;
+            padding: 0;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            border: 1px solid var(--secondary-magenta);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta), var(--accent-pink));
+            color: white;
+            padding: 40px;
+            border-radius: 25px 25px 0 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        .modal-body {
+            padding: 40px;
+        }
+        
+        .modal-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-image::after {
+            content: '🔍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .modal-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .modal-image:hover::after {
+            opacity: 0.8;
+        }
+        
+        .close {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+        
+        .order-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .order-btn {
+            flex: 1;
+            min-width: 220px;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(216, 27, 96, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .order-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: var(--transition);
+        }
+        
+        .order-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(216, 27, 96, 0.6);
+        }
+        
+        .order-btn:hover::before {
+            left: 100%;
+        }
+        
+        .edit-btn {
+            flex: 1;
+            min-width: 220px;
+            background: linear-gradient(135deg, var(--accent-blue), #1976D2);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(66, 165, 245, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .edit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: var(--transition);
+        }
+        
+        .edit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(66, 165, 245, 0.6);
+        }
+        
+        .edit-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Review Modal */
+        .review-modal-content {
+            background: linear-gradient(135deg, var(--white), var(--soft-magenta));
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            border: 1px solid var(--secondary-magenta);
+        }
+        
+        .review-modal-header {
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta), var(--accent-pink));
+            color: white;
+            padding: 40px;
+            border-radius: 25px 25px 0 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .review-modal-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        .review-modal-body {
+            padding: 40px;
+        }
+        
+        .review-modal-images {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .review-modal-image {
+            width: 100%;
+            max-width: 300px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .review-modal-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .review-modal-customer {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-magenta);
+            margin-bottom: 15px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .review-modal-rating {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .review-modal-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--dark-text);
+            margin-bottom: 30px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .review-modal-response {
+            background: linear-gradient(135deg, var(--soft-magenta), var(--white));
+            border-left: 5px solid var(--primary-magenta);
+            padding: 25px;
+            border-radius: 0 20px 20px 0;
+            margin-top: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--white), var(--soft-magenta));
+            position: relative;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+        }
+        
+        .about-text p {
+            color: var(--dark-text);
+            margin-bottom: 25px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            text-align: center;
+            font-size: 15rem;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: float-magic 6s ease-in-out infinite;
+        }
+        
+        @keyframes float-magic {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-magenta), var(--accent-pink));
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.3)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>') repeat;
+            animation: float 30s linear infinite;
+            opacity: 0.3;
+        }
+        
+        .contact h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact p {
+            font-size: 1.4rem;
+            margin-bottom: 60px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-btn {
+            background: linear-gradient(135deg, var(--white), var(--gold));
+            color: var(--primary-magenta);
+            padding: 20px 40px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: var(--transition);
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-text), #1a1a1a);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-magenta), var(--gold), var(--secondary-magenta));
+        }
+        
+        .footer .brand-footer {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer p {
+            opacity: 0.9;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            margin-top: 30px;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 15px;
+            opacity: 0.8;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            .logo::before, .logo::after {
+                display: none;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 25px;
+            }
+            
+            .nav-links {
+                gap: 25px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .about-image {
+                font-size: 10rem;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+            
+            .modal-images {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-buttons {
+                flex-direction: column;
+            }
+            
+            .order-btn, .edit-btn {
+                min-width: auto;
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .review-modal-images {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .review-modal-image {
+                width: 100%;
+            }
+            
+            .admin-panel {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 20px auto;
+                max-width: 90%;
+            }
+            
+            .admin-login {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 20px;
+                text-align: center;
+            }
+            
+            .category-tabs, .subcategory-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Aggiunto per schermi più piccoli */
+        @media (max-width: 480px) {
+            .header {
+                padding: 100px 0;
+            }
+            
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+            }
+            
+            .cta-main {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 50px;
+            }
+            
+            .product-image {
+                height: 300px;
+            }
+            
+            .product-content {
+                padding: 25px;
+            }
+            
+            .product-title {
+                font-size: 1.5rem;
+            }
+            
+            .product-price {
+                font-size: 1.8rem;
+            }
+            
+            .product-cta {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+            
+            .review-header {
+                padding: 20px;
+            }
+            
+            .review-avatar {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .review-content {
+                padding: 20px;
+            }
+            
+            .customer-review-form {
+                padding: 30px 20px;
+            }
+            
+            .submit-review-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .modal-header {
+                padding: 30px 20px;
+            }
+            
+            .modal-body {
+                padding: 30px 20px;
+            }
+            
+            .modal-image {
+                height: 250px;
+            }
+            
+            .order-btn, .edit-btn {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+            
+            .about-text h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-text p {
+                font-size: 1rem;
+            }
+            
+            .about-image {
+                font-size: 8rem;
+            }
+            
+            .contact h2 {
+                font-size: 2.5rem;
+            }
+            
+            .contact p {
+                font-size: 1.2rem;
+            }
+            
+            .contact-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .footer {
+                padding: 40px 0;
+            }
+            
+            .footer .brand-footer {
+                font-size: 2rem;
+            }
+            
+            .footer p {
+                font-size: 1rem;
+            }
+            
+            .footer-links a {
+                font-size: 1rem;
+                margin: 0 10px;
+            }
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeIn 1.2s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Pulse effect for CTA buttons */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Image Viewer Modal */
+        .image-viewer-modal {
+            display: none;
+            position: fixed;
+            z-index: 10002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            backdrop-filter: blur(5px);
+        }
+        
+        .image-viewer-content {
+            position: relative;
+            margin: 2% auto;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .image-viewer-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        
+        .image-viewer-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 45px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .image-viewer-close:hover {
+            transform: rotate(90deg);
+        }
+        
+        .image-viewer-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 20px 25px;
+            font-size: 28px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        
+        .image-viewer-nav:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .image-viewer-prev {
+            left: 30px;
+        }
+        
+        .image-viewer-next {
+            right: 30px;
+        }
+        
+        /* Highlighted review section */
+        .highlight-section {
+            position: relative;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .highlight-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-magenta), var(--gold), var(--secondary-magenta));
+            border-radius: 3px;
+        }
+        
+        .highlight-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-magenta), var(--gold), var(--secondary-magenta));
+            border-radius: 3px;
+        }
+        
+        .highlight-text {
+            font-size: 1.2rem;
+            color: var(--primary-magenta);
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        /* Category Management Styles */
+        .category-management {
+            margin-top: 20px;
+        }
+        
+        .category-list {
+            margin-top: 15px;
+            border: 2px solid var(--soft-magenta);
+            border-radius: 12px;
+            padding: 15px;
+            background: var(--white);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--soft-magenta);
+        }
+        
+        .category-item:last-child {
+            border-bottom: none;
+        }
+        
+        .category-item-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .category-item button {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        
+        .category-item button:hover {
+            transform: scale(1.1);
+        }
+        
+        .category-item .btn-edit {
+            background: var(--accent-blue);
+        }
+        
+        .category-item .btn-edit:hover {
+            background: #1976D2;
+        }
+        
+        .subcategory-list {
+            margin-top: 10px;
+            margin-left: 20px;
+            border: 1px solid var(--soft-magenta);
+            border-radius: 8px;
+            padding: 10px;
+            background: rgba(252, 228, 236, 0.5);
+        }
+        
+        .subcategory-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px dashed var(--soft-magenta);
+        }
+        
+        .subcategory-item:last-child {
+            border-bottom: none;
+        }
+        
+        .subcategory-item-buttons {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .subcategory-item button {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: var(--transition);
+        }
+        
+        .subcategory-item button:hover {
+            transform: scale(1.1);
+        }
+        
+        .subcategory-item .btn-edit {
+            background: var(--accent-blue);
+        }
+        
+        .subcategory-item .btn-edit:hover {
+            background: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorazioni -->
+    <div class="decoration">
+        <div class="circle" style="top: 10%; left: 5%;"></div>
+        <div class="circle" style="bottom: 20%; right: 10%; animation-direction: reverse;"></div>
+        <div class="floating-butterfly" style="top: 20%; animation-delay: 0s;">🦋</div>
+        <div class="floating-butterfly" style="top: 60%; animation-delay: 10s;">🦋</div>
+        <div class="floating-butterfly" style="top: 40%; animation-delay: 5s;">🦋</div>
+    </div>
+    
+    <!-- Sparkles Generator -->
+    <script>
+        // Generate sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 5000);
+        }
+        
+        // Create sparkles periodically
+        setInterval(createSparkle, 300);
+    </script>
+    
+    <!-- Admin Login Trigger -->
+    <div class="admin-login">
+        <button class="admin-trigger" onclick="showLoginModal()">
+            <i class="fas fa-user-lock"></i> Admin
+        </button>
+    </div>
+    
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <h3><i class="fas fa-lock"></i> Accesso Admin</h3>
+            <input type="password" id="adminPassword" placeholder="Inserisci la password" onkeypress="handleLoginKeypress(event)">
+            <div class="login-buttons">
+                <button class="login-btn" onclick="adminLogin()">Accedi</button>
+                <button class="login-cancel" onclick="closeLoginModal()">Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin Toggle Button (visibile solo dopo il login) -->
+    <button id="adminToggle" class="admin-toggle" onclick="toggleAdmin()" title="Pannello di Gestione">
+        <i class="fas fa-cog"></i>
+    </button>
+    
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <h3><i class="fas fa-cog"></i> Pannello di Gestione</h3>
+        
+        <div class="admin-section">
+            <h4>Impostazioni Generali</h4>
+            <label>Titolo:</label>
+            <input type="text" id="editLogo" value="MARIPOSA" onchange="updateLogo()">
+            
+            <label>Slogan:</label>
+            <input type="text" id="editTagline" value="Creazioni Artigianali Uniche • Realizzate con Passione" onchange="updateTagline()">
+            
+            <label>Email:</label>
+            <input type="email" id="editEmail" value="mariposa.handmadeee@gmail.com" onchange="updateEmail()">
+            
+            <label>Instagram:</label>
+            <input type="text" id="editInstagram" value="@mariposa.handmade_" onchange="updateInstagram()">
+            
+            <button onclick="saveChanges()">✨ Salva Modifiche</button>
+            <button onclick="loadChanges()" class="btn-secondary">🔄 Carica Dati</button>
+            <button onclick="adminLogout()" class="btn-danger">🚪 Logout</button>
+        </div>
+        
+        <div class="admin-section">
+            <h4>Gestione Categorie</h4>
+            <label>Nuova Categoria:</label>
+            <input type="text" id="newCategoryName" placeholder="Nome categoria">
+            <button onclick="addCategory()">➕ Aggiungi Categoria</button>
+            
+            <div class="category-management">
+                <h5>Categorie Esistenti</h5>
+                <div id="categoryList" class="category-list">
+                    <!-- Le categorie verranno caricate qui -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin-section">
+            <h4 id="productFormTitle">Crea Prodotto</h4>
+            <label>Nome del Prodotto:</label>
+            <input type="text" id="productName" placeholder="Nome del prodotto">
+            
+            <label>Prezzo:</label>
+            <input type="text" id="productPrice" placeholder="€0,00">
+            
+            <label>Descrizione:</label>
+            <textarea id="productDescription" rows="4" placeholder="Descrizione del prodotto"></textarea>
+            
+            <label>Categoria:</label>
+            <select id="productCategory" onchange="updateSubcategoryOptions()">
+                <option value="">Seleziona una categoria</option>
+            </select>
+            
+            <label>Sottocategoria:</label>
+            <select id="productSubcategory">
+                <option value="">Seleziona una sottocategoria</option>
+            </select>
+            
+            <label>Etichetta:</label>
+            <select id="productBadge">
+                <option value="Handmade">Fatto a Mano</option>
+                <option value="Bestseller">Bestseller</option>
+                <option value="Novità">Novità</option>
+                <option value="Personalizzabile">Personalizzabile</option>
+                <option value="Set Completo">Set Completo</option>
+            </select>
+            
+            <label>Immagini:</label>
+            <div class="image-upload">
+                <input type="file" id="productImages" multiple accept="image/*" onchange="previewImages(this)">
+                <i class="fas fa-camera" style="font-size: 2.5rem; color: var(--primary-magenta);"></i>
+                <p>Clicca per caricare immagini</p>
+            </div>
+            <div id="imagePreview" class="image-preview"></div>
+            
+            <button id="productSubmitBtn" onclick="addProduct()">✨ Crea Prodotto</button>
+            <button id="cancelEditBtn" onclick="cancelEdit()" style="display: none;" class="btn-secondary">❌ Annulla</button>
+        </div>
+        
+        <div class="admin-section">
+            <h4>Prodotti Esistenti</h4>
+            <div id="productList" class="product-list">
+                <!-- I prodotti verranno caricati qui -->
+            </div>
+        </div>
+        
+        <div class="admin-section">
+            <h4>Gestione Recensioni</h4>
+            <p>Le recensioni vengono create dai clienti. Puoi approvarle, rispondere o rimuoverle.</p>
+            <div id="reviewList" class="review-list">
+                <!-- Le recensioni verranno caricate qui -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 id="logo" class="logo fade-in" onclick="showLoginModal()">MARIPOSA</h1>
+            <p id="tagline" class="tagline fade-in">Creazioni Artigianali Uniche • Realizzate con Passione</p>
+            
+            <a href="#products" class="cta-main pulse">✨ Scopri le Creazioni</a>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">🦋 Mariposa</div>
+                <ul class="nav-links">
+                    <li><a href="#products">Le Mie Creazioni</a></li>
+                    <li><a href="#reviews">Recensioni</a></li>
+                    <li><a href="#about">Chi Sono</a></li>
+                    <li><a href="#contact">Contatti</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title fade-in">Le Mie Creazioni</h2>
+            
+            <!-- Category Tabs -->
+            <div id="categoryTabs" class="category-tabs">
+                <!-- Le categorie verranno caricate qui dinamicamente -->
+            </div>
+            
+            <!-- Subcategory Tabs -->
+            <div id="subcategoryTabs" class="subcategory-tabs">
+                <!-- Le sottocategorie verranno caricate qui dinamicamente -->
+            </div>
+            
+            <div id="productsGrid" class="products-grid">
+                <!-- I prodotti verranno caricati qui dinamicamente -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Reviews Section - Enfatizzata -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <div class="highlight-section">
+                <h2 class="section-title fade-in">Recensioni dei Clienti</h2>
+                <p class="highlight-text">La tua opinione è importante per noi!</p>
+            </div>
+            
+            <div id="reviewsGrid" class="reviews-grid">
+                <!-- Le recensioni verranno caricate qui dinamicamente -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Customer Review Form - Sempre visibile -->
+    <section id="customerReviewSection" class="customer-review-section">
+        <div class="container">
+            <div class="highlight-section">
+                <h2 class="section-title fade-in">Lascia una Recensione</h2>
+                <p class="highlight-text">Condividi la tua esperienza con i nostri prodotti</p>
+            </div>
+            
+            <div class="customer-review-form">
+                <form id="customerReviewForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerName">Il tuo nome *</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">La tua email *</label>
+                            <input type="email" id="customerEmail" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerOrder">Numero ordine *</label>
+                            <input type="text" id="customerOrder" placeholder="Es: #12345" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerRating">Valutazione *</label>
+                            <select id="customerRating" required>
+                                <option value="">Seleziona una valutazione</option>
+                                <option value="5">⭐⭐⭐⭐⭐ (Eccellente)</option>
+                                <option value="4">⭐⭐⭐⭐ (Ottimo)</option>
+                                <option value="3">⭐⭐⭐ (Buono)</option>
+                                <option value="2">⭐⭐ (Sufficiente)</option>
+                                <option value="1">⭐ (Insufficiente)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerReview">La tua recensione *</label>
+                        <textarea id="customerReview" required placeholder="Condividi la tua esperienza con i nostri prodotti..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Foto (opzionale - massimo 3)</label>
+                        <div class="image-upload">
+                            <input type="file" id="customerReviewImages" multiple accept="image/*" onchange="previewCustomerImages(this)" max="3">
+                            <i class="fas fa-camera-retro" style="font-size: 2.5rem; color: var(--primary-magenta);"></i>
+                            <p>Clicca per caricare foto</p>
+                        </div>
+                        <div id="customerImagePreview" class="image-preview"></div>
+                    </div>
+                    
+                    <button type="submit" class="submit-review-btn">
+                        <i class="fas fa-paper-plane"></i> Invia Recensione
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalHeader" class="modal-header">
+                <h2 id="modalTitle">Titolo del Prodotto</h2>
+                <p id="modalPrice">€0,00</p>
+            </div>
+            <div class="modal-body">
+                <div id="modalImages" class="modal-images">
+                    <!-- Immagini verranno inserite qui -->
+                </div>
+                <div id="modalDescription">
+                    <p>Descrizione del prodotto...</p>
+                </div>
+                <div class="order-buttons">
+                    <button class="order-btn" onclick="orderInstagram()">
+                        <i class="fab fa-instagram"></i> Ordina su Instagram
+                    </button>
+                    <button class="order-btn" onclick="orderEmail()">
+                        <i class="fas fa-envelope"></i> Ordina via Email
+                    </button>
+                    <button id="editProductBtn" class="edit-btn" onclick="editProductFromModal()" style="display: none;">
+                        <i class="fas fa-edit"></i> Modifica Prodotto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="review-modal-content">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <div id="reviewModalHeader" class="review-modal-header">
+                <h2>Recensione</h2>
+            </div>
+            <div class="review-modal-body">
+                <div id="reviewModalImages" class="review-modal-images">
+                    <!-- Immagini verranno inserite qui -->
+                </div>
+                <div id="reviewModalCustomer" class="review-modal-customer">Nome Cliente</div>
+                <div id="reviewModalRating" class="review-modal-rating"></div>
+                <div id="reviewModalText" class="review-modal-text">Testo della recensione...</div>
+                <div id="reviewModalResponse" class="review-modal-response" style="display: none;">
+                    <div class="review-response-title">
+                        <i class="fas fa-reply"></i> Risposta
+                    </div>
+                    <div id="reviewModalResponseText" class="review-response-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Image Viewer Modal -->
+    <div id="imageViewerModal" class="image-viewer-modal">
+        <div class="image-viewer-content">
+            <span class="image-viewer-close" onclick="closeImageViewer()">&times;</span>
+            <img id="imageViewerImage" class="image-viewer-image" src="" alt="Immagine ingrandita">
+            <button class="image-viewer-nav image-viewer-prev" onclick="previousImage()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="image-viewer-nav image-viewer-next" onclick="nextImage()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h2>L'Arte del Fatto a Mano</h2>
+                    <p>Benvenuta nel mondo di Mariposa Handmade, dove ogni creazione nasce dall'amore per l'artigianato e l'attenzione ai dettagli.</p>
+                    <p>Ogni pezzo è realizzato completamente a mano, dalla progettazione alla finitura, utilizzando materiali di alta qualità e tecniche tradizionali. La mia missione è portare bellezza, profumo e unicità nella vostra casa attraverso le mie creazioni.</p>
+                    <p>Come una farfalla che si trasforma, ogni mia creazione è un pezzo unico che evolve dalle mie mani alle vostre, portando con sé l'energia positiva e la passione che metto in ogni singolo lavoro.</p>
+                </div>
+                <div class="about-image fade-in">
+                    ✨🦋✨
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="fade-in">Trasforma la Tua Casa con le Mie Creazioni</h2>
+            <p class="fade-in">Ogni pezzo è unico come te. Contattami per ordinare o per creare qualcosa di speciale insieme.</p>
+            <div class="contact-buttons fade-in">
+                <a href="https://instagram.com/mariposa.handmade_" target="_blank" rel="noopener noreferrer" class="contact-btn">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="mailto:mariposa.handmadeee@gmail.com" class="contact-btn">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="brand-footer">Mariposa Handmade</div>
+            <p>&copy; 2025 Mariposa Handmade. Tutti i diritti riservati. ✨</p>
+            <div class="footer-links">
+                <a href="#customerReviewSection">Lascia una Recensione</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Configurazione del sito
+        let siteConfig = {
+            email: 'mariposa.handmadeee@gmail.com',
+            instagram: '@mariposa.handmade_',
+            logo: 'MARIPOSA',
+            tagline: 'Creazioni Artigianali Uniche • Realizzate con Passione'
+        };
+        
+        // Password admin
+        const ADMIN_PASSWORD = 'giovimari142225';
+        
+        // Categorie e sottocategorie
+        let categories = [
+            {
+                id: 1,
+                name: 'Resina',
+                subcategories: [
+                    { id: 101, name: 'Segnalibri' }
+                ]
+            },
+            {
+                id: 2,
+                name: 'Candele',
+                subcategories: [
+                    { id: 201, name: 'Fiori' },
+                    { id: 202, name: 'Bouquet' },
+                ]
+            },
+             {
+                id: 3,
+                name: 'Gesso Ceramico',
+                subcategories: [
+                    { id: 301, name: 'Bruciatore' },
+                ]
+             },
+             {
+                id: 4,
+                name: 'Eventi',
+                subcategories: [
+                    { id: 401, name: 'Eventi' },
+                ]
+             }
+        ];
+        
+        // Filtro corrente
+        let currentCategory = '';
+        let currentSubcategory = '';
+        
+        // Prodotti di esempio
+        let products = [
+            {
+                id: 1,
+                title: "Bruciatore a Forma di Castello",
+                price: "€24,99",
+                description: "Elegante diffusore in gesso ceramico, perfetto per profumare i tuoi ambienti con stile. Ogni pezzo è realizzato completamente a mano con cura.",
+                badge: "Fatto a Mano",
+                category: 3,
+                subcategory: 301,
+                images: [
+                   "https://files.fm/u/egjp2b5ang"
+                ]
+            },
+            {
+                id: 2,
+                title: "Bouquet candele medio",
+                price: "€43,99",
+                description: "Realizzato interamente a meno, vaso riutilizzabile in gesso ceramico e candele profumate. Perchè sceglierlo? Non appassisce e rimane un ricordo speciale. Utilizzabile anche come bomboniera (il prezzo varia in base alla quantità ordinata).",
+                badge: "Best Seller",
+                category: 2,
+                subcategory: 202,
+                images: [
+                   "https://files.fm/u/vabhd6cczz"
+                ]
+            },
+            {
+                id: 3,
+                title: "Candele a Forma di fiore",
+                price: "€6,99",
+                description: "Delicate candele a forma di fiore disponibili in qualsiasi colorazione.",
+                badge: "Bestseller",
+                category: 2,
+                subcategory: 201,
+                images: [
+                    "https://files.fm/u/ufwgynfk7t",
+                    "https://files.fm/u/nja2drfqbm"
+                ]
+            },
+            {
+                id: 4,
+                title: "Segnalibri in Resina",
+                price: "€15,00",
+                description: "Segnalibri completamente personalizzabili in resina trasparente con fiori secchi, glitter e decorazioni varie. Ogni pezzo è unico e irripetibile.",
+                badge: "Personalizzabile",
+                category: 1,
+                subcategory: 101,
+                images: [
+                    "https://files.fm/u/qquwpamrj6"
+                ]
+            },
+            {
+                id: 5,
+                title: "Bomboniere per Eventi",
+                price: "Prezzi Variabili",
+                description: "Bomboniere artigianali completamente personalizzate per ogni tipo di evento: lauree, matrimoni, battesimi, compleanni e cerimonie speciali.",
+                badge: "Personalizzabile",
+                category: 4,
+                images: [
+                    "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://files.fm/u/w3achw5xpx",
+                    "https://files.fm/u/3e4jzrhsh6"
+                ]
+            }
+        ];
+        
+        // Recensioni - inizialmente vuote
+        let reviews = [];
+        let pendingReviews = []; // Recensioni in attesa di approvazione
+        
+        // Variabili globali
+        let currentProduct = '';
+        let currentReview = '';
+        let uploadedImages = [];
+        let uploadedCustomerImages = [];
+        let editingProductId = null;
+        let editingReviewId = null;
+        let editingCategoryId = null;
+        let editingSubcategoryId = null;
+        let currentImageIndex = 0;
+        let currentImageArray = [];
+        let isAdminLoggedIn = false;
+        
+        // Funzioni di autenticazione admin
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+            document.getElementById('adminPassword').focus();
+        }
+        
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+        
+        function handleLoginKeypress(event) {
+            if (event.key === 'Enter') {
+                adminLogin();
+            }
+        }
+        
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                localStorage.setItem('admin_logged_in', 'true');
+                document.getElementById('adminToggle').style.display = 'flex';
+                closeLoginModal();
+                alert('✅ Accesso effettuato con successo!');
+            } else {
+                alert('❌ Password errata! Riprova.');
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
+            }
+        }
+        
+        function adminLogout() {
+            isAdminLoggedIn = false;
+            localStorage.removeItem('admin_logged_in');
+            document.getElementById('adminToggle').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'none';
+            alert('👋 Logout effettuato con successo!');
+        }
+        
+        function checkAdminLogin() {
+            const isLoggedIn = localStorage.getItem('admin_logged_in');
+            if (isLoggedIn === 'true') {
+                isAdminLoggedIn = true;
+                document.getElementById('adminToggle').style.display = 'flex';
+            }
+        }
+        
+        // Funzioni del pannello di amministrazione
+        function toggleAdmin() {
+            if (!isAdminLoggedIn) {
+                showLoginModal();
+                return;
+            }
+            
+            const panel = document.getElementById('adminPanel');
+            panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+            if (panel.style.display === 'block') {
+                loadProductList();
+                loadReviewList();
+                loadCategoryList();
+                updateCategoryOptions();
+            }
+        }
+        
+        function updateLogo() {
+            const newLogo = document.getElementById('editLogo').value;
+            document.getElementById('logo').textContent = newLogo;
+            siteConfig.logo = newLogo;
+        }
+        
+        function updateTagline() {
+            const newTagline = document.getElementById('editTagline').value;
+            document.getElementById('tagline').textContent = newTagline;
+            siteConfig.tagline = newTagline;
+        }
+        
+        function updateEmail() {
+            const newEmail = document.getElementById('editEmail').value;
+            siteConfig.email = newEmail;
+        }
+        
+        function updateInstagram() {
+            const newInstagram = document.getElementById('editInstagram').value;
+            siteConfig.instagram = newInstagram;
+        }
+        
+        function saveChanges() {
+            try {
+                localStorage.setItem('mariposa_config', JSON.stringify(siteConfig));
+                localStorage.setItem('mariposa_products', JSON.stringify(products));
+                localStorage.setItem('mariposa_reviews', JSON.stringify(reviews));
+                localStorage.setItem('mariposa_pending_reviews', JSON.stringify(pendingReviews));
+                localStorage.setItem('mariposa_categories', JSON.stringify(categories));
+                alert('✅ Modifiche salvate con successo!');
+            } catch (e) {
+                console.error('Errore durante il salvataggio dei dati:', e);
+                alert('❌ Errore durante il salvataggio dei dati. Riprova.');
+            }
+        }
+        
+        // Funzione per caricare i dati senza mostrare alert
+        function loadChangesSilent() {
+            const savedConfig = localStorage.getItem('mariposa_config');
+            const savedProducts = localStorage.getItem('mariposa_products');
+            const savedReviews = localStorage.getItem('mariposa_reviews');
+            const savedPendingReviews = localStorage.getItem('mariposa_pending_reviews');
+            const savedCategories = localStorage.getItem('mariposa_categories');
+            
+            if (savedConfig) {
+                siteConfig = JSON.parse(savedConfig);
+                
+                // Aggiorna tutti i campi
+                document.getElementById('editLogo').value = siteConfig.logo;
+                document.getElementById('editTagline').value = siteConfig.tagline;
+                document.getElementById('editEmail').value = siteConfig.email;
+                document.getElementById('editInstagram').value = siteConfig.instagram;
+                
+                // Applica le modifiche
+                updateLogo();
+                updateTagline();
+                updateEmail();
+                updateInstagram();
+            }
+            
+            if (savedProducts) {
+                products = JSON.parse(savedProducts);
+            }
+            
+            if (savedReviews) {
+                reviews = JSON.parse(savedReviews);
+            }
+            
+            if (savedPendingReviews) {
+                pendingReviews = JSON.parse(savedPendingReviews);
+            }
+            
+            if (savedCategories) {
+                categories = JSON.parse(savedCategories);
+            }
+            
+            // Aggiorna UI dopo aver caricato i dati
+            renderCategories();
+            updateCategoryOptions();
+            renderProducts();
+            renderReviews();
+        }
+        
+        // Funzione per caricare i dati con alert (solo quando l'utente clicca sul pulsante)
+        function loadChanges() {
+            loadChangesSilent();
+            alert('✅ Dati caricati!');
+        }
+        
+        // Funzioni per la gestione delle categorie
+        function addCategory() {
+            const categoryName = document.getElementById('newCategoryName').value.trim();
+            
+            if (!categoryName) {
+                alert('⚠️ Per favore inserisci un nome per la categoria');
+                return;
+            }
+            
+            // Controlla se la categoria esiste già
+            if (categories.some(cat => cat.name.toLowerCase() === categoryName.toLowerCase())) {
+                alert('⚠️ Questa categoria esiste già');
+                return;
+            }
+            
+            // Crea nuova categoria
+            const newCategory = {
+                id: Date.now(),
+                name: categoryName,
+                subcategories: []
+            };
+            
+            categories.push(newCategory);
+            document.getElementById('newCategoryName').value = '';
+            
+            // Aggiorna UI
+            loadCategoryList();
+            renderCategories();
+            updateCategoryOptions();
+            
+            alert('✅ Categoria creata con successo!');
+        }
+        
+        function addSubcategory(categoryId) {
+            const subcategoryName = prompt('Inserisci il nome della sottocategoria:');
+            
+            if (!subcategoryName || !subcategoryName.trim()) {
+                return;
+            }
+            
+            const category = categories.find(cat => cat.id === categoryId);
+            if (!category) return;
+            
+            // Controlla se la sottocategoria esiste già
+            if (category.subcategories.some(sub => sub.name.toLowerCase() === subcategoryName.toLowerCase())) {
+                alert('⚠️ Questa sottocategoria esiste già');
+                return;
+            }
+            
+            // Crea nuova sottocategoria
+            const newSubcategory = {
+                id: Date.now(),
+                name: subcategoryName.trim()
+            };
+            
+            category.subcategories.push(newSubcategory);
+            
+            // Aggiorna UI
+            loadCategoryList();
+            renderCategories();
+            updateCategoryOptions();
+            updateSubcategoryOptions();
+            
+            alert('✅ Sottocategoria creata con successo!');
+        }
+        
+        function editCategory(categoryId) {
+            const category = categories.find(cat => cat.id === categoryId);
+            if (!category) return;
+            
+            const newName = prompt('Modifica nome categoria:', category.name);
+            
+            if (!newName || !newName.trim() || newName.trim() === category.name) {
+                return;
+            }
+            
+            // Controlla se il nome è già in uso
+            if (categories.some(cat => cat.id !== categoryId && cat.name.toLowerCase() === newName.toLowerCase())) {
+                alert('⚠️ Questo nome è già in uso');
+                return;
+            }
+            
+            category.name = newName.trim();
+            
+            // Aggiorna UI
+            loadCategoryList();
+            renderCategories();
+            updateCategoryOptions();
+            
+            alert('✅ Categoria aggiornata con successo!');
+        }
+        
+        function editSubcategory(categoryId, subcategoryId) {
+            const category = categories.find(cat => cat.id === categoryId);
+            if (!category) return;
+            
+            const subcategory = category.subcategories.find(sub => sub.id === subcategoryId);
+            if (!subcategory) return;
+            
+            const newName = prompt('Modifica nome sottocategoria:', subcategory.name);
+            
+            if (!newName || !newName.trim() || newName.trim() === subcategory.name) {
+                return;
+            }
+            
+            // Controlla se il nome è già in uso
+            if (category.subcategories.some(sub => sub.id !== subcategoryId && sub.name.toLowerCase() === newName.toLowerCase())) {
+                alert('⚠️ Questo nome è già in uso');
+                return;
+            }
+            
+            subcategory.name = newName.trim();
+            
+            // Aggiorna UI
+            loadCategoryList();
+            renderCategories();
+            updateCategoryOptions();
+            updateSubcategoryOptions();
+            
+            alert('✅ Sottocategoria aggiornata con successo!');
+        }
+        
+        function deleteCategory(categoryId) {
+            if (!confirm('Sei sicuro di voler eliminare questa categoria? Verranno eliminate anche tutte le sottocategorie.')) {
+                return;
+            }
+            
+            // Controlla se ci sono prodotti in questa categoria
+            const hasProducts = products.some(prod => prod.category === categoryId);
+            if (hasProducts) {
+                if (!confirm('Attenzione: ci sono prodotti in questa categoria. Continuando verranno eliminati anche i prodotti. Vuoi procedere?')) {
+                    return;
+                }
+                
+                // Elimina i prodotti in questa categoria
+                products = products.filter(prod => prod.category !== categoryId);
+            }
+            
+            // Elimina la categoria
+            categories = categories.filter(cat => cat.id !== categoryId);
+            
+            // Aggiorna UI
+            loadCategoryList();
+            renderCategories();
+            updateCategoryOptions();
+            renderProducts();
+            
+            alert('✅ Categoria eliminata con successo!');
+        }
+        
+        function deleteSubcategory(categoryId, subcategoryId) {
+            if (!confirm('Sei sicuro di voler eliminare questa sottocategoria?')) {
+                return;
+            }
+            
+            // Controlla se ci sono prodotti in questa sottocategoria
+            const hasProducts = products.some(prod => prod.subcategory === subcategoryId);
+            if (hasProducts) {
+                if (!confirm('Attenzione: ci sono prodotti in questa sottocategoria. Continuando verranno eliminati anche i prodotti. Vuoi procedere?')) {
+                    return;
+                }
+                
+                // Elimina i prodotti in questa sottocategoria
+                products = products.filter(prod => prod.subcategory !== subcategoryId);
+            }
+            
+            // Trova la categoria e la sottocategoria
+            const category = categories.find(cat => cat.id === categoryId);
+            if (category) {
+                category.subcategories = category.subcategories.filter(sub => sub.id !== subcategoryId);
+            }
+            
+            // Aggiorna UI
+            loadCategoryList();
+            renderCategories();
+            updateCategoryOptions();
+            renderProducts();
+            
+            alert('✅ Sottocategoria eliminata con successo!');
+        }
+        
+        function loadCategoryList() {
+            const listContainer = document.getElementById('categoryList');
+            listContainer.innerHTML = '';
+            
+            categories.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category-item';
+                
+                const categoryInfo = document.createElement('div');
+                categoryInfo.innerHTML = `<strong>${category.name}</strong>`;
+                
+                const categoryButtons = document.createElement('div');
+                categoryButtons.className = 'category-item-buttons';
+                
+                const addSubcategoryBtn = document.createElement('button');
+                addSubcategoryBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                addSubcategoryBtn.title = 'Aggiungi sottocategoria';
+                addSubcategoryBtn.onclick = () => addSubcategory(category.id);
+                
+                const editCategoryBtn = document.createElement('button');
+                editCategoryBtn.className = 'btn-edit';
+                editCategoryBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                editCategoryBtn.title = 'Modifica categoria';
+                editCategoryBtn.onclick = () => editCategory(category.id);
+                
+                const deleteCategoryBtn = document.createElement('button');
+                deleteCategoryBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteCategoryBtn.title = 'Elimina categoria';
+                deleteCategoryBtn.onclick = () => deleteCategory(category.id);
+                
+                categoryButtons.appendChild(addSubcategoryBtn);
+                categoryButtons.appendChild(editCategoryBtn);
+                categoryButtons.appendChild(deleteCategoryBtn);
+                
+                categoryDiv.appendChild(categoryInfo);
+                categoryDiv.appendChild(categoryButtons);
+                
+                // Aggiungi sottocategorie
+                if (category.subcategories.length > 0) {
+                    const subcategoryList = document.createElement('div');
+                    subcategoryList.className = 'subcategory-list';
+                    
+                    category.subcategories.forEach(subcategory => {
+                        const subcategoryDiv = document.createElement('div');
+                        subcategoryDiv.className = 'subcategory-item';
+                        
+                        const subcategoryInfo = document.createElement('div');
+                        subcategoryInfo.innerHTML = subcategory.name;
+                        
+                        const subcategoryButtons = document.createElement('div');
+                        subcategoryButtons.className = 'subcategory-item-buttons';
+                        
+                        const editSubcategoryBtn = document.createElement('button');
+                        editSubcategoryBtn.className = 'btn-edit';
+                        editSubcategoryBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                        editSubcategoryBtn.title = 'Modifica sottocategoria';
+                        editSubcategoryBtn.onclick = () => editSubcategory(category.id, subcategory.id);
+                        
+                        const deleteSubcategoryBtn = document.createElement('button');
+                        deleteSubcategoryBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                        deleteSubcategoryBtn.title = 'Elimina sottocategoria';
+                        deleteSubcategoryBtn.onclick = () => deleteSubcategory(category.id, subcategory.id);
+                        
+                        subcategoryButtons.appendChild(editSubcategoryBtn);
+                        subcategoryButtons.appendChild(deleteSubcategoryBtn);
+                        
+                        subcategoryDiv.appendChild(subcategoryInfo);
+                        subcategoryDiv.appendChild(subcategoryButtons);
+                        
+                        subcategoryList.appendChild(subcategoryDiv);
+                    });
+                    
+                    categoryDiv.appendChild(subcategoryList);
+                }
+                
+                listContainer.appendChild(categoryDiv);
+            });
+        }
+        
+        function updateCategoryOptions() {
+            const categorySelect = document.getElementById('productCategory');
+            categorySelect.innerHTML = '<option value="">Seleziona una categoria</option>';
+            
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+            
+            // Aggiorna anche le schede delle categorie
+            renderCategories();
+        }
+        
+        function updateSubcategoryOptions() {
+            const categoryId = parseInt(document.getElementById('productCategory').value);
+            const subcategorySelect = document.getElementById('productSubcategory');
+            subcategorySelect.innerHTML = '<option value="">Seleziona una sottocategoria</option>';
+            
+            if (categoryId) {
+                const category = categories.find(cat => cat.id === categoryId);
+                if (category && category.subcategories.length > 0) {
+                    category.subcategories.forEach(subcategory => {
+                        const option = document.createElement('option');
+                        option.value = subcategory.id;
+                        option.textContent = subcategory.name;
+                        subcategorySelect.appendChild(option);
+                    });
+                }
+            }
+        }
+        
+        function renderCategories() {
+            const categoryTabs = document.getElementById('categoryTabs');
+            categoryTabs.innerHTML = '';
+            
+            // Aggiungi tab "Tutte"
+            const allTab = document.createElement('div');
+            allTab.className = 'category-tab';
+            if (!currentCategory) allTab.classList.add('active');
+            allTab.textContent = 'Tutte';
+            allTab.onclick = () => filterByCategory('', '');
+            categoryTabs.appendChild(allTab);
+            
+            // Aggiungi tab per ogni categoria
+            categories.forEach(category => {
+                const tab = document.createElement('div');
+                tab.className = 'category-tab';
+                if (currentCategory === category.id) tab.classList.add('active');
+                tab.textContent = category.name;
+                tab.onclick = () => filterByCategory(category.id, '');
+                categoryTabs.appendChild(tab);
+            });
+            
+            // Renderizza le sottocategorie se una categoria è selezionata
+            if (currentCategory) {
+                renderSubcategories();
+            } else {
+                document.getElementById('subcategoryTabs').innerHTML = '';
+            }
+        }
+        
+        function renderSubcategories() {
+            const subcategoryTabs = document.getElementById('subcategoryTabs');
+            subcategoryTabs.innerHTML = '';
+            
+            const category = categories.find(cat => cat.id === currentCategory);
+            if (!category) return;
+            
+            // Aggiungi tab "Tutte" per le sottocategorie
+            const allTab = document.createElement('div');
+            allTab.className = 'subcategory-tab';
+            if (!currentSubcategory) allTab.classList.add('active');
+            allTab.textContent = 'Tutte';
+            allTab.onclick = () => filterByCategory(currentCategory, '');
+            subcategoryTabs.appendChild(allTab);
+            
+            // Aggiungi tab per ogni sottocategoria
+            category.subcategories.forEach(subcategory => {
+                const tab = document.createElement('div');
+                tab.className = 'subcategory-tab';
+                if (currentSubcategory === subcategory.id) tab.classList.add('active');
+                tab.textContent = subcategory.name;
+                tab.onclick = () => filterByCategory(currentCategory, subcategory.id);
+                subcategoryTabs.appendChild(tab);
+            });
+        }
+        
+        function filterByCategory(categoryId, subcategoryId) {
+            currentCategory = categoryId;
+            currentSubcategory = subcategoryId;
+            
+            // Aggiorna le schede attive
+            renderCategories();
+            
+            // Renderizza i prodotti filtrati
+            renderProducts();
+        }
+        
+        // Funzioni per la gestione dei prodotti
+        function previewImages(input) {
+            const preview = document.getElementById('imagePreview');
+            
+            if (input.files) {
+                Array.from(input.files).forEach(file => {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const container = document.createElement('div');
+                        container.style.position = 'relative';
+                        container.style.display = 'inline-block';
+                        
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.width = '90px';
+                        img.style.height = '90px';
+                        img.style.objectFit = 'cover';
+                        img.style.borderRadius = '12px';
+                        img.style.border = '3px solid var(--white)';
+                        img.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                        img.style.transition = 'var(--transition)';
+                        
+                        const removeBtn = document.createElement('button');
+                        removeBtn.className = 'remove-image';
+                        removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                        removeBtn.onclick = function() {
+                            container.remove();
+                            // Rimuovi dall'array uploadedImages
+                            const index = uploadedImages.indexOf(e.target.result);
+                            if (index > -1) {
+                                uploadedImages.splice(index, 1);
+                            }
+                        };
+                        
+                        container.appendChild(img);
+                        container.appendChild(removeBtn);
+                        preview.appendChild(container);
+                        uploadedImages.push(e.target.result);
+                    }
+                    
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+        
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            const description = document.getElementById('productDescription').value;
+            const categoryId = parseInt(document.getElementById('productCategory').value);
+            const subcategoryId = parseInt(document.getElementById('productSubcategory').value) || null;
+            const badge = document.getElementById('productBadge').value;
+            
+            if (!name || !price || !description || !categoryId) {
+                alert('⚠️ Per favore compila tutti i campi obbligatori');
+                return;
+            }
+            
+            if (uploadedImages.length === 0 && !editingProductId) {
+                alert('⚠️ Per favore carica almeno un\'immagine');
+                return;
+            }
+            
+            if (editingProductId) {
+                // Aggiorna prodotto esistente
+                const productIndex = products.findIndex(p => p.id === editingProductId);
+                if (productIndex !== -1) {
+                    // Se non sono state caricate nuove immagini, mantieni quelle esistenti
+                    const finalImages = uploadedImages.length > 0 ? uploadedImages : products[productIndex].images;
+                    
+                    products[productIndex] = {
+                        id: editingProductId,
+                        title: name,
+                        price: price,
+                        description: description,
+                        category: categoryId,
+                        subcategory: subcategoryId,
+                        badge: badge,
+                        images: finalImages
+                    };
+                }
+                alert('✅ Prodotto aggiornato!');
+                cancelEdit();
+            } else {
+                // Aggiungi nuovo prodotto
+                const newProduct = {
+                    id: Date.now(),
+                    title: name,
+                    price: price,
+                    description: description,
+                    category: categoryId,
+                    subcategory: subcategoryId,
+                    badge: badge,
+                    images: [...uploadedImages]
+                };
+                
+                products.push(newProduct);
+                alert('✅ Nuovo prodotto creato!');
+            }
+            
+            renderProducts();
+            loadProductList();
+            
+            // Reset form
+            resetProductForm();
+        }
+        
+        function editProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            
+            editingProductId = id;
+            
+            // Popola il form con i dati del prodotto
+            document.getElementById('productName').value = product.title;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productDescription').value = product.description;
+            document.getElementById('productCategory').value = product.category;
+            updateSubcategoryOptions();
+            document.getElementById('productSubcategory').value = product.subcategory || '';
+            document.getElementById('productBadge').value = product.badge;
+            
+            // Mostra le immagini esistenti
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            uploadedImages = [...product.images];
+            
+            product.images.forEach(imageUrl => {
+                const container = document.createElement('div');
+                container.style.position = 'relative';
+                container.style.display = 'inline-block';
+                
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.style.width = '90px';
+                img.style.height = '90px';
+                img.style.objectFit = 'cover';
+                img.style.borderRadius = '12px';
+                img.style.border = '3px solid var(--white)';
+                img.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                img.style.transition = 'var(--transition)';
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-image';
+                removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                removeBtn.onclick = function() {
+                    container.remove();
+                    // Rimuovi dall'array uploadedImages
+                    const index = uploadedImages.indexOf(imageUrl);
+                    if (index > -1) {
+                        uploadedImages.splice(index, 1);
+                    }
+                };
+                
+                container.appendChild(img);
+                container.appendChild(removeBtn);
+                preview.appendChild(container);
+            });
+            
+            // Cambia i pulsanti
+            document.getElementById('productFormTitle').textContent = 'Modifica Prodotto';
+            document.getElementById('productSubmitBtn').textContent = '✨ Aggiorna Prodotto';
+            document.getElementById('productSubmitBtn').onclick = addProduct;
+            document.getElementById('cancelEditBtn').style.display = 'block';
+            
+            // Scorri fino al form
+            document.getElementById('adminPanel').scrollTop = 0;
+        }
+        
+        function editProductFromModal() {
+            closeModal();
+            toggleAdmin();
+            editProduct(currentProduct);
+        }
+        
+        function cancelEdit() {
+            editingProductId = null;
+            resetProductForm();
+            
+            // Ripristina i pulsanti
+            document.getElementById('productFormTitle').textContent = 'Crea Prodotto';
+            document.getElementById('productSubmitBtn').textContent = '✨ Crea Prodotto';
+            document.getElementById('productSubmitBtn').onclick = addProduct;
+            document.getElementById('cancelEditBtn').style.display = 'none';
+        }
+        
+        function resetProductForm() {
+            document.getElementById('productName').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productDescription').value = '';
+            document.getElementById('productCategory').value = '';
+            document.getElementById('productSubcategory').value = '';
+            document.getElementById('productBadge').value = 'Fatto a Mano';
+            document.getElementById('productImages').value = '';
+            document.getElementById('imagePreview').innerHTML = '';
+            uploadedImages = [];
+        }
+        
+        function deleteProduct(id) {
+            if (confirm('Sei sicuro di voler eliminare questo prodotto?')) {
+                products = products.filter(p => p.id !== id);
+                renderProducts();
+                loadProductList();
+                
+                // Se stiamo modificando questo prodotto, annulla la modifica
+                if (editingProductId === id) {
+                    cancelEdit();
+                }
+                
+                alert('✅ Prodotto eliminato!');
+            }
+        }
+        
+        function loadProductList() {
+            const listContainer = document.getElementById('productList');
+            listContainer.innerHTML = '';
+            
+            products.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'product-item';
+                item.innerHTML = `
+                    <div>
+                        <strong>${product.title}</strong> - ${product.price}
+                    </div>
+                    <div class="product-item-buttons">
+                        <button class="btn-edit" onclick="editProduct(${product.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="deleteProduct(${product.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                listContainer.appendChild(item);
+            });
+        }
+        
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            
+            // Filtra i prodotti in base alla categoria e sottocategoria selezionata
+            let filteredProducts = products;
+            
+            if (currentCategory) {
+                filteredProducts = products.filter(p => p.category === currentCategory);
+                
+                if (currentSubcategory) {
+                    filteredProducts = filteredProducts.filter(p => p.subcategory === currentSubcategory);
+                }
+            }
+            
+            // Renderizza i prodotti filtrati
+            filteredProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card fade-in';
+                card.onclick = () => openProductModal(product.id);
+                
+                card.innerHTML = `
+                    <div class="product-image" style="background-image: url('${product.images[0]}');"></div>
+                    <div class="product-badge">${product.badge}</div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-description">${product.description.substring(0, 100)}...</p>
+                        <div class="product-price">${product.price}</div>
+                        <button class="product-cta">
+                            <i class="fas fa-eye"></i> Scopri di Più
+                        </button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+            
+            // Aggiungi la card per aggiungere nuovi prodotti (solo per admin)
+            if (isAdminLoggedIn) {
+                const addCard = document.createElement('div');
+                addCard.className = 'add-product-card fade-in';
+                addCard.onclick = () => {
+                    toggleAdmin();
+                    resetProductForm();
+                    document.getElementById('adminPanel').scrollTop = document.getElementById('adminPanel').scrollHeight;
+                };
+                
+                addCard.innerHTML = `
+                    <div class="add-product-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <div class="add-product-text">Aggiungi Nuovo Prodotto</div>
+                `;
+                
+                grid.appendChild(addCard);
+            }
+        }
+        
+        // Funzioni per la gestione delle recensioni
+        function loadReviewList() {
+            const listContainer = document.getElementById('reviewList');
+            listContainer.innerHTML = '';
+            
+            // Mostra recensioni approvate
+            if (reviews.length > 0) {
+                const approvedTitle = document.createElement('h5');
+                approvedTitle.textContent = 'Recensioni Approvate';
+                approvedTitle.style.marginTop = '20px';
+                approvedTitle.style.marginBottom = '15px';
+                listContainer.appendChild(approvedTitle);
+                
+                reviews.forEach(review => {
+                    const item = document.createElement('div');
+                    item.className = 'review-item';
+                    
+                    let responseHtml = '';
+                    if (review.adminResponse) {
+                        responseHtml = `
+                            <div style="margin-top: 15px; padding: 12px; background: #f0f0f0; border-radius: 8px;">
+                                <strong>Risposta:</strong> ${review.adminResponse}
+                            </div>
+                        `;
+                    }
+                    
+                    item.innerHTML = `
+                        <div>
+                            <strong>${review.customerName}</strong> - ${review.rating} stelle
+                            ${responseHtml}
+                        </div>
+                        <div class="review-item-buttons">
+                            <button class="btn-warning" onclick="respondToReview(${review.id})">
+                                <i class="fas fa-reply"></i>
+                            </button>
+                            <button onclick="deleteReview(${review.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    listContainer.appendChild(item);
+                });
+            }
+            
+            // Mostra recensioni in attesa di approvazione
+            if (pendingReviews.length > 0) {
+                const pendingTitle = document.createElement('h5');
+                pendingTitle.textContent = 'Recensioni in Attesa di Approvazione';
+                pendingTitle.style.marginTop = '20px';
+                pendingTitle.style.marginBottom = '15px';
+                pendingTitle.style.color = '#FF9800';
+                listContainer.appendChild(pendingTitle);
+                
+                pendingReviews.forEach(review => {
+                    const item = document.createElement('div');
+                    item.className = 'review-item';
+                    item.style.backgroundColor = '#FFF8E1';
+                    
+                    item.innerHTML = `
+                        <div>
+                            <strong>${review.customerName}</strong> - ${review.rating} stelle
+                            <br><small>Ordine: ${review.orderNumber}</small>
+                        </div>
+                        <div class="review-item-buttons">
+                            <button class="btn-edit" onclick="approveReview(${review.id})">
+                                <i class="fas fa-check"></i> Approva
+                            </button>
+                            <button onclick="deletePendingReview(${review.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    listContainer.appendChild(item);
+                });
+            }
+            
+            if (reviews.length === 0 && pendingReviews.length === 0) {
+                const noReviews = document.createElement('p');
+                noReviews.textContent = 'Nessuna recensione disponibile';
+                noReviews.style.textAlign = 'center';
+                noReviews.style.padding = '25px';
+                noReviews.style.color = '#999';
+                listContainer.appendChild(noReviews);
+            }
+        }
+        
+        function renderReviews() {
+            const grid = document.getElementById('reviewsGrid');
+            grid.innerHTML = '';
+            
+            if (reviews.length === 0) {
+                const noReviews = document.createElement('div');
+                noReviews.style.textAlign = 'center';
+                noReviews.style.padding = '60px';
+                noReviews.innerHTML = `
+                    <i class="fas fa-star" style="font-size: 4rem; color: var(--white); margin-bottom: 20px;"></i>
+                    <p style="color: var(--white); font-size: 1.2rem; opacity: 0.9;">Ancora nessuna recensione. Sii il primo a condividere la tua esperienza!</p>
+                    <button class="contact-btn" style="margin-top: 30px; background: linear-gradient(135deg, var(--white), var(--gold)); color: var(--primary-magenta);" onclick="document.getElementById('customerReviewSection').scrollIntoView({behavior: 'smooth'});">
+                        <i class="fas fa-star"></i> Lascia una Recensione
+                    </button>
+                `;
+                grid.appendChild(noReviews);
+                return;
+            }
+            
+            reviews.forEach(review => {
+                const card = document.createElement('div');
+                card.className = 'review-card fade-in';
+                card.onclick = () => openReviewModal(review.id);
+                
+                // Format date
+                const reviewDate = new Date(review.date);
+                const formattedDate = reviewDate.toLocaleDateString('it-IT', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                
+                let imagesHtml = '';
+                if (review.images && review.images.length > 0) {
+                    imagesHtml = '<div class="review-images">';
+                    review.images.slice(0, 3).forEach(imageUrl => {
+                        imagesHtml += `<img class="review-image" src="${imageUrl}" alt="Recensione di ${review.customerName}">`;
+                    });
+                    imagesHtml += '</div>';
+                }
+                
+                let responseHtml = '';
+                if (review.adminResponse) {
+                    responseHtml = `
+                        <div class="review-response">
+                            <div class="review-response-title">
+                                <i class="fas fa-reply"></i> Risposta
+                            </div>
+                            <div class="review-response-text">${review.adminResponse}</div>
+                        </div>
+                    `;
+                }
+                
+                card.innerHTML = `
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://ui-avatars.com/api/?name=${encodeURIComponent(review.customerName)}&background=FCE4EC&color=D81B60" alt="${review.customerName}">
+                        <div class="review-info">
+                            <div class="review-customer">${review.customerName}</div>
+                            <div class="review-date">${formattedDate}</div>
+                            <div class="review-rating">${generateStars(review.rating)}</div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <div class="review-text">${review.text}</div>
+                        ${imagesHtml}
+                        ${responseHtml}
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+        
+        function respondToReview(id) {
+            const review = reviews.find(r => r.id === id);
+            if (!review) return;
+            
+            const response = prompt("Rispondi alla recensione di " + review.customerName + ":", review.adminResponse || "");
+            if (response !== null) {
+                review.adminResponse = response;
+                saveChanges();
+                loadReviewList();
+                renderReviews();
+            }
+        }
+        
+        function approveReview(id) {
+            const reviewIndex = pendingReviews.findIndex(r => r.id === id);
+            if (reviewIndex !== -1) {
+                const review = pendingReviews[reviewIndex];
+                review.date = new Date().toISOString();
+                reviews.push(review);
+                pendingReviews.splice(reviewIndex, 1);
+                
+                saveChanges();
+                loadReviewList();
+                renderReviews();
+                
+                alert('✅ Recensione approvata con successo!');
+            }
+        }
+        
+        function deleteReview(id) {
+            if (confirm('Sei sicuro di voler eliminare questa recensione?')) {
+                reviews = reviews.filter(r => r.id !== id);
+                saveChanges();
+                loadReviewList();
+                renderReviews();
+                alert('✅ Recensione eliminata!');
+            }
+        }
+        
+        function deletePendingReview(id) {
+            if (confirm('Sei sicuro di voler eliminare questa recensione?')) {
+                pendingReviews = pendingReviews.filter(r => r.id !== id);
+                saveChanges();
+                loadReviewList();
+                alert('✅ Recensione eliminata!');
+            }
+        }
+        
+        // Funzioni per il form delle recensioni dei clienti
+        function previewCustomerImages(input) {
+            const preview = document.getElementById('customerImagePreview');
+            preview.innerHTML = '';
+            uploadedCustomerImages = [];
+            
+            if (input.files) {
+                // Limita a 3 immagini
+                const files = Array.from(input.files).slice(0, 3);
+                
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.width = '90px';
+                        img.style.height = '90px';
+                        img.style.objectFit = 'cover';
+                        img.style.borderRadius = '12px';
+                        img.style.border = '3px solid var(--white)';
+                        img.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                        img.style.transition = 'var(--transition)';
+                        preview.appendChild(img);
+                        uploadedCustomerImages.push(e.target.result);
+                    }
+                    
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+        
+        // Gestione del form delle recensioni dei clienti
+        document.getElementById('customerReviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const customerName = document.getElementById('customerName').value;
+            const customerEmail = document.getElementById('customerEmail').value;
+            const customerOrder = document.getElementById('customerOrder').value;
+            const customerRating = document.getElementById('customerRating').value;
+            const customerReview = document.getElementById('customerReview').value;
+            
+            // Crea una nuova recensione in attesa di approvazione
+            const newReview = {
+                id: Date.now(),
+                customerName: customerName,
+                email: customerEmail,
+                orderNumber: customerOrder,
+                rating: parseInt(customerRating),
+                text: customerReview,
+                images: [...uploadedCustomerImages],
+                adminResponse: '',
+                date: new Date().toISOString()
+            };
+            
+            // Aggiungi alle recensioni in attesa
+            pendingReviews.push(newReview);
+            
+            // Salva nel localStorage
+            saveChanges();
+            
+            // Reset form
+            document.getElementById('customerReviewForm').reset();
+            document.getElementById('customerImagePreview').innerHTML = '';
+            uploadedCustomerImages = [];
+            
+            // Mostra messaggio di conferma
+            alert('Grazie per aver lasciato una recensione! Sarà pubblicata dopo la verifica da parte nostra.');
+            
+            // Aggiorna la visualizzazione delle recensioni se l'admin è loggato
+            if (isAdminLoggedIn) {
+                loadReviewList();
+            }
+        });
+        
+        // Funzioni per i modal
+        function openProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            currentProduct = productId;
+            currentImageIndex = 0;
+            currentImageArray = product.images;
+            
+            // Aggiorna contenuto modal
+            document.getElementById('modalTitle').textContent = product.title;
+            document.getElementById('modalPrice').textContent = product.price;
+            document.getElementById('modalDescription').innerHTML = `<p>${product.description}</p>`;
+            
+            // Aggiorna immagini
+            const imagesContainer = document.getElementById('modalImages');
+            imagesContainer.innerHTML = '';
+            product.images.forEach((imageUrl, index) => {
+                const imageDiv = document.createElement('div');
+                imageDiv.className = 'modal-image';
+                imageDiv.style.backgroundImage = `url('${imageUrl}')`;
+                imageDiv.onclick = () => openImageViewer(index);
+                imagesContainer.appendChild(imageDiv);
+            });
+            
+            // Mostra pulsante di modifica solo se l'admin è loggato
+            const editBtn = document.getElementById('editProductBtn');
+            if (isAdminLoggedIn) {
+                editBtn.style.display = 'flex';
+            } else {
+                editBtn.style.display = 'none';
+            }
+            
+            // Mostra modal
+            document.getElementById('productModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('productModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function openReviewModal(reviewId) {
+            const review = reviews.find(r => r.id === reviewId);
+            if (!review) return;
+            
+            currentReview = reviewId;
+            
+            // Format date
+            const reviewDate = new Date(review.date);
+            const formattedDate = reviewDate.toLocaleDateString('it-IT', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            // Aggiorna contenuto modal
+            document.getElementById('reviewModalCustomer').textContent = review.customerName;
+            document.getElementById('reviewModalRating').innerHTML = generateStars(review.rating);
+            document.getElementById('reviewModalText').textContent = review.text;
+            
+            // Aggiorna immagini
+            const imagesContainer = document.getElementById('reviewModalImages');
+            imagesContainer.innerHTML = '';
+            
+            if (review.images && review.images.length > 0) {
+                review.images.forEach(imageUrl => {
+                    const imageDiv = document.createElement('img');
+                    imageDiv.className = 'review-modal-image';
+                    imageDiv.src = imageUrl;
+                    imageDiv.onclick = () => openImageViewer(review.images.indexOf(imageUrl));
+                    imagesContainer.appendChild(imageDiv);
+                });
+            }
+            
+            // Mostra risposta se esiste
+            if (review.adminResponse) {
+                document.getElementById('reviewModalResponse').style.display = 'block';
+                document.getElementById('reviewModalResponseText').textContent = review.adminResponse;
+            } else {
+                document.getElementById('reviewModalResponse').style.display = 'none';
+            }
+            
+            // Mostra modal
+            document.getElementById('reviewModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeReviewModal() {
+            document.getElementById('reviewModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Funzioni per il visualizzatore di immagini
+        function openImageViewer(index) {
+            currentImageIndex = index;
+            updateImageViewer();
+            document.getElementById('imageViewerModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function updateImageViewer() {
+            document.getElementById('imageViewerImage').src = currentImageArray[currentImageIndex];
+        }
+        
+        function closeImageViewer() {
+            document.getElementById('imageViewerModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function previousImage() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateImageViewer();
+            }
+        }
+        
+        function nextImage() {
+            if (currentImageIndex < currentImageArray.length - 1) {
+                currentImageIndex++;
+                updateImageViewer();
+            }
+        }
+        
+        // Funzioni per gli ordini
+        function orderInstagram() {
+            // Apri direttamente il profilo Instagram
+            const instagramUrl = 'https://instagram.com/mariposa.handmade_';
+            window.open(instagramUrl, '_blank');
+        }
+        
+        function orderEmail() {
+            const product = products.find(p => p.id === currentProduct);
+            const subject = `Richiesta informazioni: ${product.title}`;
+            const body = `Ciao!%0A%0ASono interessato/a al prodotto: ${product.title} (${product.price}).%0A%0APotresti darmi maggiori informazioni su:%0A- Disponibilità%0A- Tempi di realizzazione%0A- Modalità di pagamento e spedizione%0A%0AGrazie!%0A%0A🦋✨ Dal sito Mariposa Handmade`;
+            const emailUrl = `mailto:mariposa.handmadeee@gmail.com?subject=${subject}&body=${body}`;
+            window.location.href = emailUrl;
+        }
+        
+        // Funzioni di utilità
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Chiudi modal quando si clicca fuori
+        window.onclick = function(event) {
+            const loginModal = document.getElementById('loginModal');
+            const productModal = document.getElementById('productModal');
+            const reviewModal = document.getElementById('reviewModal');
+            const imageViewer = document.getElementById('imageViewerModal');
+            
+            if (event.target === loginModal) {
+                closeLoginModal();
+            }
+            if (event.target === productModal) {
+                closeModal();
+            }
+            if (event.target === reviewModal) {
+                closeReviewModal();
+            }
+            if (event.target === imageViewer) {
+                closeImageViewer();
+            }
+        }
+        
+        // Tasto ESC per chiudere i modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLoginModal();
+                closeModal();
+                closeReviewModal();
+                closeImageViewer();
+            }
+            
+            // Freccia sinistra/destra per navigare tra le immagini
+            if (event.key === 'ArrowLeft') {
+                previousImage();
+            }
+            if (event.key === 'ArrowRight') {
+                nextImage();
+            }
+        });
+        
+        // Intersection Observer per le animazioni
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Osserva tutti gli elementi con animazione
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Effetto parallasse per l'header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+        
+        // Carica i dati salvati all'avvio in modo silenzioso
+        window.addEventListener('load', () => {
+            // Controlla se l'admin è già loggato
+            checkAdminLogin();
+            
+            // Carica i dati salvati in modo silenzioso (senza mostrare alert)
+            loadChangesSilent();
+        });
+    </script>
+</body>
+</html>
